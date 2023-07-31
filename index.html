@@ -275,8 +275,8 @@ function showAIAnalysisResult(result) {
 
 
     async function fetchContractCode(address) {
-      const apiKeys = '8YUX8ETXVV5Y6YNWCN6TECQXSXAZTVRFPS';
-      const apiUrls = `https://api.etherscan.io/api?module=contract&action=getsourcecode&address=${address}&apikey=${apiKeys}`;
+      const apiKeys = '8FAC6EJJFS4NJBHMZGZ8286WEKHAE2RTED';
+      const apiUrls = `https://api.basescan.org/api?module=contract&action=getsourcecode&address=${address}&apikey=${apiKeys}`;
 
       try {
         const response = await fetch(apiUrls);
