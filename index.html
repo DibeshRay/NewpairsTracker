@@ -132,7 +132,7 @@
     async function fetchTokenCreationEvents() {
       const topic0 = "0x60806040";
 
-      const apiUrl = `https://api.basescan.org/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address=${uniswapFactoryAddress}&apikey=${etherscanApiKey}`;
+      const apiUrl = `https://api.basescan.org/api?module=logs&action=getLogs&fromBlock=2011800&toBlock=latest&address=${uniswapFactoryAddress}&apikey=${etherscanApiKey}`;
 
       try {
         const response = await fetch(apiUrl);
