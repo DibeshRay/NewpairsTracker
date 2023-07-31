@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>New Uniswap Tokens</title>
+  <title>New BaseChain Tokens</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -104,7 +104,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>New Uniswap Tokens</h1>
+    <h1>New BaseChain Tokens</h1>
     <button class="button" onclick="fetchNewTokens()">Fetch New Tokens</button>
     <ul id="tokenList"></ul>
     <div class="contract-code-section" id="contractCodeSection">
@@ -115,7 +115,7 @@
 
   <script src="https://cdn.ethers.io/lib/ethers-5.4.umd.min.js"></script>
   <script>
-    const etherscanApiKey = "8FAC6EJJFS4NJBHMZGZ8286WEKHAE2RTED";
+    const basescanApiKey = "8FAC6EJJFS4NJBHMZGZ8286WEKHAE2RTED";
     const uniswapFactoryAddress = "0x169C06b4cfB09bFD73A81e6f2Bb1eB514D75bB19";
 
     async function fetchNewTokens() {
@@ -132,7 +132,7 @@
     async function fetchTokenCreationEvents() {
       const topic0 = "0x60806040";
 
-      const apiUrl = `https://api.basescan.org/api?module=logs&action=getLogs&fromBlock=2011800&toBlock=latest&address=${uniswapFactoryAddress}&apikey=${etherscanApiKey}`;
+      const apiUrl = `https://api.basescan.org/api?module=logs&action=getLogs&fromBlock=2011800&toBlock=latest&address=${uniswapFactoryAddress}&apikey=${basescanApiKey}`;
 
       try {
         const response = await fetch(apiUrl);
@@ -173,7 +173,7 @@
         li.innerHTML = `
           <span class="address">${formattedAddress}</span>
           <p class="timestamp">Created on: ${timestampStr}</p>
-          <button class="button" onclick="goToEtherscan('${formattedAddress}')">View on Etherscan</button>
+          <button class="button" onclick="goTobasescan('${formattedAddress}')">View on basescan</button>
           <button class="button contract-btn" onclick="fetchAndDisplayContractCode('${formattedAddress}')">Fetch Contract Code</button>
         `;
 
@@ -182,7 +182,7 @@
     }
 
     async function fetchBlockTimestamp(address) {
-      const apiUrl = `https://api.basescan.org/api?module=proxy&action=eth_getBlockByNumber&tag=latest&boolean=true&apikey=${etherscanApiKey}`;
+      const apiUrl = `https://api.basescan.org/api?module=proxy&action=eth_getBlockByNumber&tag=latest&boolean=true&apikey=${basescanApiKey}`;
 
       try {
         const response = await fetch(apiUrl);
@@ -209,7 +209,7 @@
       return address.replace(/^0x0+/, '0x');
     }
 
-    function goToEtherscan(address) {
+    function goTobasescan(address) {
       window.open(`https://basescan.org/address/${address}`, '_blank');
     }
 
