@@ -165,70 +165,7 @@
           return;
         }
 
-          const li = document.createElement("li");
-
-        // Fetch contract deployer's address
-        const deployerAddress = await fetchDeployerAddress(token);
-        const formattedDeployer = formatAddress(deployerAddress);
-
-        // Fetch deployer's ETH balance
-        const ethBalance = await fetchEthBalance(deployerAddress);
-
-        const timestamp = await fetchBlockTimestamp(token);
-        const timestampStr = new Date(timestamp * 1000).toLocaleString();
-
-        li.innerHTML = `
-          <span class="address">${formattedAddress}</span>
-          <p>Deployed by: ${formattedDeployer}</p>
-          <p>ETH Balance: ${ethBalance} ETH</p>
-          <p class="timestamp">Created on: ${timestampStr}</p>
-          <button class="button" onclick="goTobasescan('${formattedAddress}')">View on basescan</button>
-          <button class="button contract-btn" onclick="fetchAndDisplayContractCode('${formattedAddress}')">Fetch Contract Code</button>
-        `;
-
-        tokenList.appendChild(li);
-      });
-    }
-
-    async function fetchDeployerAddress(address) {
-      const apiUrl = `https://api.basescan.org/api?module=contract&action=getcreator&address=${address}&apikey=${basescanApiKey}`;
-
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.status === "1" && data.message === "OK") {
-          return data.result;
-        } else {
-          console.error("Error fetching deployer address:", data.message);
-          throw new Error("Failed to fetch deployer address");
-        }
-      } catch (error) {
-        console.error("Error fetching deployer address:", error);
-        throw error;
-      }
-    }
-
-    async function fetchEthBalance(address) {
-      const apiUrl = `https://api.basescan.org/api?module=account&action=balance&address=${address}&apikey=${basescanApiKey}`;
-
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.status === "1" && data.message === "OK") {
-          // Convert balance from wei to ETH
-          const ethBalance = ethers.utils.formatEther(data.result);
-          return ethBalance;
-        } else {
-          console.error("Error fetching ETH balance:", data.message);
-          throw new Error("Failed to fetch ETH balance");
-        }
-      } catch (error) {
-        console.error("Error fetching ETH balance:", error);
-        throw error;
-      }
-
+          
         const li = document.createElement("li");
 
         const timestamp = await fetchBlockTimestamp(token);
